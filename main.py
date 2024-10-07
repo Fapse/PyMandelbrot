@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
 
 #np.warnings.filterwarnings("ignore")
 
@@ -19,9 +20,6 @@ def get_members(c, num_iterations):
     return c[mask]
 
 if __name__ == '__main__':
-    c = complex_matrix(-2, 0.5, -1.5, 1.5, pixel_density=2048)
-    plt.imshow(is_stable(c,num_iterations=20), cmap="binary")
-    plt.gca().set_aspect("equal")
-    plt.axis("off")
-    plt.tight_layout()
-    plt.show()
+    c = complex_matrix(-2, 0.5, -1.5, 1.5, pixel_density=4096)
+    image = Image.fromarray(~is_stable(c, num_iterations=20))
+    image.show()
