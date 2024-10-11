@@ -15,9 +15,9 @@ def hsb(hue_degrees: int, saturation: float, brightness: float):
     )
 
 def create_mandelbrot() -> Image:
-    mandelbrot_set = MandelbrotSet(max_iterations=400, escape_radius=1000)
-    image = Image.new(mode="RGB", size=(1024, 1024))
-    #    for pixel in Viewport(image, center=-0.75, width=3.5):
+    mandelbrot_set = MandelbrotSet(max_iterations=450, escape_radius=1000)
+    image = Image.new(mode="RGB", size=(512, 512))
+    #for pixel in Viewport(image, center=-0.75, width=3.5): # display complete mandelbrot set
     for pixel in Viewport(image, center=-0.7435 + 0.1314j, width=0.002):
         stability = mandelbrot_set.stability(complex(pixel), smooth=False)
         pixel.color = (
