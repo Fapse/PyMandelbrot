@@ -1,3 +1,7 @@
+# Draw Mandelbrot sets in Python
+# Based on the course on the RealPython website:
+# https://realpython.com/mandelbrot-set-python/
+
 from mandelbrot import MandelbrotSet
 mandelbrot_set = MandelbrotSet(max_iterations=20, escape_radius=1000)
 

@@ -1,3 +1,7 @@
+# Draw Mandelbrot sets in Python
+# Based on the course on the RealPython website:
+# https://realpython.com/mandelbrot-set-python/
+
 # mandelbrot.py
 
 from dataclasses import dataclass
