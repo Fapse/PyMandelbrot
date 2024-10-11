@@ -2,7 +2,7 @@
 # Based on the course on the RealPython website:
 # https://realpython.com/mandelbrot-set-python/
 
-from mandelbrot import MandelbrotSet
+from mandelbrotset import MandelbrotSet
 from PIL import Image
 from PIL.ImageColor import getrgb
 from viewport import Viewport
