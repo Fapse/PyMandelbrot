@@ -2,19 +2,33 @@
 # Based on the course on the RealPython website:
 # https://realpython.com/mandelbrot-set-python/
 
-from PIL import Image
-from PIL import ImageEnhance
 from mandelbrot import MandelbrotSet
+from PIL import Image
+from PIL.ImageColor import getrgb
 from viewport import Viewport
 
-mandelbrot_set = MandelbrotSet(max_iterations=256, escape_radius=1000)
+def hsb(hue_degrees: int, saturation: float, brightness: float):
+    return getrgb(
+        f"hsv({hue_degrees % 360},"
+        f"{saturation * 100}%,"
+        f"{brightness * 100}%)"
+    )
 
-image = Image.new(mode="L", size=(512, 512))
+if __name__ == "__main__":
+    print("This might take a while...")
 
-for pixel in Viewport(image, center=-0.7435 + 0.1314j, width=0.002):
-    c = complex(pixel)
-    instability = 1 - mandelbrot_set.stability(c, smooth=True)
-    pixel.color = int(instability * 255)
+    mandelbrot_set = MandelbrotSet(max_iterations=20, escape_radius=1000)
+    image = Image.new(mode="RGB", size=(1024, 1024))
+    for pixel in Viewport(image, center=-0.75, width=3.5):
+        stability = mandelbrot_set.stability(complex(pixel), smooth=True)
+        pixel.color = (
+            (0, 0, 0)
+            if stability == 1
+            else hsb(
+                hue_degrees=int(stability * 360),
+                saturation=stability,
+                brightness=1,
+            )
+        )
 
-enhancer = ImageEnhance.Brightness(image)
-enhancer.enhance(1.25).show()
+    image.show()

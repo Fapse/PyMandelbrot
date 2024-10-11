@@ -2,8 +2,6 @@
 # Based on the course on the RealPython website:
 # https://realpython.com/mandelbrot-set-python/
 
-# mandelbrot.py
-
 from dataclasses import dataclass
 from math import log
 
