@@ -49,6 +49,9 @@ class MandelbrotWindow(tk.Tk):
     def _minus_click(self):
         print("Minus clicked")
 
+    def _go_click(self):
+        print("Minus clicked")
+
     def _create_buttons(self):
         display_frame = tk.Frame(master=self)
         button1=tk.Button(display_frame, text="U", command=self._up_click)
@@ -63,6 +66,8 @@ class MandelbrotWindow(tk.Tk):
         button5.grid(row=3, column=0)
         button6=tk.Button(display_frame, text="+", command=self._plus_click)
         button6.grid(row=3, column=2)
+        button6=tk.Button(display_frame, text="GO", command=self._go_click)
+        button6.grid(row=4, column=1)
 
         display_frame.pack(side=tk.LEFT, expand=False)
 
