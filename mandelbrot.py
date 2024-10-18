@@ -26,6 +26,18 @@ class Mandelbrot:
             f"{brightness * 100}%)"
         )
 
+    def move_right(self) -> None:
+        self.center_real += 0.1
+
+    def move_left(self) -> None:
+        self.center_real -= 0.1
+
+    def move_up(self) -> None:
+        self.center_im += 0.1
+
+    def move_down(self) -> None:
+        self.center_im -= 0.1
+
     def create_mandelbrot(self) -> Image:
         mandelbrot_set = MandelbrotSet(max_iterations=self.max_iterations, escape_radius=self.escape_radius)
         image = Image.new(mode="RGB", size=(self.image_width, self.image_height))

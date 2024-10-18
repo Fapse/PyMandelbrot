@@ -7,6 +7,7 @@ class MandelbrotWindow(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("PyMandelbrot")
+        self._my_mandelbrot = Mandelbrot()
         self._create_mandelbrot_display()
         self._create_mandelbrot_image()
         self._create_buttons()
@@ -23,8 +24,7 @@ class MandelbrotWindow(tk.Tk):
 
     def _create_mandelbrot_image(self):
         display_frame = tk.Frame(master=self)
-        my_mandelbrot = Mandelbrot()
-        ph = ImageTk.PhotoImage(my_mandelbrot.create_mandelbrot())
+        ph = ImageTk.PhotoImage(self._my_mandelbrot.create_mandelbrot())
         mandel_img = tk.Label(display_frame, image=ph)
         mandel_img.image = ph
         mandel_img.pack()
