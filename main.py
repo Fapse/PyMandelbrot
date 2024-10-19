@@ -16,11 +16,11 @@ class MandelbrotWindow(tk.Tk):
 
     def _request_mandelbrot_image(self):
         ph = ImageTk.PhotoImage(self._my_mandelbrot.create_mandelbrot())
-        mandel_img = tk.Label(self._frame_mandelbrot_image, image=ph)
-        mandel_img.image = ph
-        mandel_img.pack()
-        self.display = mandel_img
-        self.display.pack()
+        for widget in self._frame_mandelbrot_image.winfo_children():
+            widget.destroy()
+        mandelbrot_image = tk.Label(self._frame_mandelbrot_image, image=ph)
+        mandelbrot_image.image = ph
+        mandelbrot_image.pack()
 
     def _up_click(self):
         print("Up clicked")
@@ -40,12 +40,15 @@ class MandelbrotWindow(tk.Tk):
 
     def _plus_click(self):
         print("Plus clicked")
+        self._my_mandelbrot.zoom_in()
 
     def _minus_click(self):
         print("Minus clicked")
+        self._my_mandelbrot.zoom_out()
 
     def _go_click(self):
-        print("Minus clicked")
+        print("Go clicked")
+        self._request_mandelbrot_image()
 
     def _create_buttons(self):
         display_frame = tk.Frame(master=self)

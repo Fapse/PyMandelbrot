@@ -38,6 +38,12 @@ class Mandelbrot:
     def move_down(self) -> None:
         self.center_im -= 0.1
 
+    def zoom_in(self) -> None:
+        self.width -= 0.1
+
+    def zoom_out(self) -> None:
+        self.width += 0.1
+
     def create_mandelbrot(self) -> Image:
         mandelbrot_set = MandelbrotSet(max_iterations=self.max_iterations, escape_radius=self.escape_radius)
         image = Image.new(mode="RGB", size=(self.image_width, self.image_height))
