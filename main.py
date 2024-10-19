@@ -1,47 +1,42 @@
 import tkinter as tk
-from tkinter import font
 from PIL import ImageTk
+from PIL.ImageOps import expand
+
 from mandelbrot import Mandelbrot
 
 class MandelbrotWindow(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("PyMandelbrot")
+        self._frame_mandelbrot_image = tk.Frame(master=self, width=512, height=512)
+        self._frame_mandelbrot_image.pack(side=tk.LEFT, expand=False)
         self._my_mandelbrot = Mandelbrot()
-        self._create_mandelbrot_display()
-        self._create_mandelbrot_image()
+        self._request_mandelbrot_image()
         self._create_buttons()
 
-    def _create_mandelbrot_display(self):
-        display_frame = tk.Frame(master=self)
-        display_frame.pack(fill=tk.X)
-        self.display = tk.Label(
-            master=display_frame,
-            text="Mandelbrot",
-            font=font.Font(size=28, weight="bold"),
-        )
-        self.display.pack()
-
-    def _create_mandelbrot_image(self):
-        display_frame = tk.Frame(master=self)
+    def _request_mandelbrot_image(self):
         ph = ImageTk.PhotoImage(self._my_mandelbrot.create_mandelbrot())
-        mandel_img = tk.Label(display_frame, image=ph)
+        mandel_img = tk.Label(self._frame_mandelbrot_image, image=ph)
         mandel_img.image = ph
         mandel_img.pack()
-        display_frame.pack(side=tk.LEFT, expand=False)
+        self.display = mandel_img
         self.display.pack()
 
     def _up_click(self):
         print("Up clicked")
+        self._my_mandelbrot.move_up()
 
     def _left_click(self):
         print("Left clicked")
+        self._my_mandelbrot.move_left()
 
     def _right_click(self):
         print("Right clicked")
+        self._my_mandelbrot.move_right()
 
     def _down_click(self):
         print("Down clicked")
+        self._my_mandelbrot.move_down()
 
     def _plus_click(self):
         print("Plus clicked")
@@ -68,7 +63,6 @@ class MandelbrotWindow(tk.Tk):
         button6.grid(row=3, column=2)
         button6=tk.Button(display_frame, text="GO", command=self._go_click)
         button6.grid(row=4, column=1)
-
         display_frame.pack(side=tk.LEFT, expand=False)
 
 if __name__ == "__main__":
