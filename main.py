@@ -1,7 +1,6 @@
 import tkinter as tk
 from PIL import ImageTk
 from PIL.ImageOps import expand
-
 from mandelbrot import Mandelbrot
 
 class MandelbrotWindow(tk.Tk):
@@ -55,8 +54,12 @@ class MandelbrotWindow(tk.Tk):
         print("Go clicked")
         self._request_mandelbrot_image()
 
+    def _go_reset(self):
+        print("Reset clicked")
+        self._my_mandelbrot.reset_image()
+        self._request_mandelbrot_image()
+
     def _create_buttons(self):
-        #display_frame = tk.Frame(master=self)
         button1=tk.Button(self._frame_pan_buttons, text="U", command=self._up_click)
         button1.grid(row=0, column=1)
         button2=tk.Button(self._frame_pan_buttons, text="L", command=self._left_click)
@@ -73,8 +76,9 @@ class MandelbrotWindow(tk.Tk):
         self._frame_zoom_buttons.pack()
         button6=tk.Button(self._frame_go_reset_buttons, text="GO", command=self._go_click)
         button6.grid(row=0, column=0)
+        button7 = tk.Button(self._frame_go_reset_buttons, text="RS", command=self._go_reset)
+        button7.grid(row=0, column=1)
         self._frame_go_reset_buttons.pack()
-        #display_frame.pack(side=tk.LEFT, expand=False)
 
 if __name__ == "__main__":
     mb_window = MandelbrotWindow()
