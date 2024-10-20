@@ -13,7 +13,7 @@ class Mandelbrot:
         self.center_real: float = -0.75
         self.center_im: float = 0.0
         self.width: float = 3.5
-        self.max_iterations: int = 25
+        #self.max_iterations: int = 25
         self.escape_radius: int = 1000
         self.image_width: int = 512
         self.image_height: int = 512
@@ -26,32 +26,32 @@ class Mandelbrot:
             f"{brightness * 100}%)"
         )
 
-    def move_right(self) -> None:
-        self.center_real += 0.1
+    def move_right(self, pan_step: float) -> None:
+        self.center_real += pan_step
 
-    def move_left(self) -> None:
-        self.center_real -= 0.1
+    def move_left(self, pan_step: float) -> None:
+        self.center_real -= pan_step
 
-    def move_up(self) -> None:
-        self.center_im += 0.1
+    def move_up(self, pan_step: float) -> None:
+        self.center_im += pan_step
 
-    def move_down(self) -> None:
-        self.center_im -= 0.1
+    def move_down(self, pan_step: float) -> None:
+        self.center_im -= pan_step
 
-    def zoom_in(self) -> None:
-        self.width -= 0.1
+    def zoom_in(self, zoom_step: float) -> None:
+        self.width -= zoom_step
 
-    def zoom_out(self) -> None:
-        self.width += 0.1
+    def zoom_out(self, zoom_step: float) -> None:
+        self.width += zoom_step
 
     def reset_image(self) -> None:
         self.center_real: float = -0.75
         self.center_im: float = 0.0
         self.width: float = 3.5
-        self.max_iterations: int = 25
+        #self.max_iterations: int = 25
 
-    def create_mandelbrot(self) -> Image:
-        mandelbrot_set = MandelbrotSet(max_iterations=self.max_iterations, escape_radius=self.escape_radius)
+    def create_mandelbrot(self, max_iterations: int) -> Image:
+        mandelbrot_set = MandelbrotSet(max_iterations=max_iterations, escape_radius=self.escape_radius)
         image = Image.new(mode="RGB", size=(self.image_width, self.image_height))
         #for pixel in Viewport(image, center=-0.75, width=3.5): # display complete mandelbrot set
         for pixel in Viewport(image, center=complex(self.center_real, self.center_im), width=self.width):
