@@ -41,29 +41,31 @@ class MandelbrotWindow(tk.Tk):
     def _up_click(self):
         print("Up clicked")
         self._my_mandelbrot.move_up(float(self._tf_pan_factor.get()))
+        self._request_mandelbrot_image()
 
     def _left_click(self):
         print("Left clicked")
         self._my_mandelbrot.move_left(float(self._tf_pan_factor.get()))
+        self._request_mandelbrot_image()
 
     def _right_click(self):
         print("Right clicked")
         self._my_mandelbrot.move_right(float(self._tf_pan_factor.get()))
+        self._request_mandelbrot_image()
 
     def _down_click(self):
         print("Down clicked")
         self._my_mandelbrot.move_down(float(self._tf_pan_factor.get()))
+        self._request_mandelbrot_image()
 
     def _plus_click(self):
         print("Plus clicked")
         self._my_mandelbrot.zoom_in(float(self._tf_zoom_factor.get()))
+        self._request_mandelbrot_image()
 
     def _minus_click(self):
         print("Minus clicked")
         self._my_mandelbrot.zoom_out(float(self._tf_zoom_factor.get()))
-
-    def _go_click(self):
-        print("Go clicked")
         self._request_mandelbrot_image()
 
     def _go_reset(self):
@@ -93,10 +95,8 @@ class MandelbrotWindow(tk.Tk):
         button6.grid(row=0, column=1)
         self._frame_zoom_buttons.pack()
         self._frame_input_area.pack()
-        button6=tk.Button(self._frame_go_reset_buttons, text="GO", command=self._go_click)
-        button6.grid(row=0, column=0)
-        button7 = tk.Button(self._frame_go_reset_buttons, text="RS", command=self._go_reset)
-        button7.grid(row=0, column=1)
+        button7 = tk.Button(self._frame_go_reset_buttons, text="Reset", command=self._go_reset)
+        button7.grid(row=0, column=0)
         self._frame_go_reset_buttons.pack()
 
 if __name__ == "__main__":
