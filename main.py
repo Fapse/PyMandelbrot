@@ -1,5 +1,6 @@
 import tkinter as tk
 from PIL import ImageTk
+from image_area import ImageArea
 from mandelbrot import Mandelbrot
 
 class MandelbrotWindow(tk.Frame):
@@ -7,8 +8,7 @@ class MandelbrotWindow(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.winfo_toplevel().title("PyMandelbrot")
         self._parent = parent
-        self._frame_mandelbrot_image = tk.Frame(master=self, width=512, height=512)
-        self._frame_mandelbrot_image.pack(side=tk.LEFT, expand=False)
+        self._image_area = ImageArea(self)
         self._frame_control_area = tk.Frame(master=self)
         self._frame_control_area.pack(side=tk.LEFT, expand=False)
         self._frame_pan_buttons = tk.Frame(master=self._frame_control_area)
@@ -34,9 +34,9 @@ class MandelbrotWindow(tk.Frame):
 
     def _request_mandelbrot_image(self):
         ph = ImageTk.PhotoImage(self._my_mandelbrot.create_mandelbrot(int(self._tf_max_iterations.get())))
-        for widget in self._frame_mandelbrot_image.winfo_children():
+        for widget in self._image_area.winfo_children():
             widget.destroy()
-        mandelbrot_image = tk.Label(self._frame_mandelbrot_image, image=ph)
+        mandelbrot_image = tk.Label(self._image_area, image=ph)
         mandelbrot_image.image = ph
         mandelbrot_image.pack()
 
