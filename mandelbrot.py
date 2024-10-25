@@ -13,7 +13,6 @@ class Mandelbrot:
         self.center_real: float = -0.75
         self.center_im: float = 0.0
         self.width: float = 3.5
-        #self.max_iterations: int = 25
         self.escape_radius: int = 1000
         self.image_width: int = 512
         self.image_height: int = 512
@@ -48,12 +47,10 @@ class Mandelbrot:
         self.center_real: float = -0.75
         self.center_im: float = 0.0
         self.width: float = 3.5
-        #self.max_iterations: int = 25
 
     def create_mandelbrot(self, max_iterations: int) -> Image:
         mandelbrot_set = MandelbrotSet(max_iterations=max_iterations, escape_radius=self.escape_radius)
         image = Image.new(mode="RGB", size=(self.image_width, self.image_height))
-        #for pixel in Viewport(image, center=-0.75, width=3.5): # display complete mandelbrot set
         for pixel in Viewport(image, center=complex(self.center_real, self.center_im), width=self.width):
             stability = mandelbrot_set.stability(complex(pixel), smooth=True)
             pixel.color = (
