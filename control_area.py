@@ -29,32 +29,32 @@ class ControlArea(tk.Frame):
     def _up_click(self):
         print("Up clicked")
         self._parent.my_mandelbrot.move_up(float(self._tf_pan_factor.get()))
-        self._parent.request_mandelbrot_image(self._tf_max_iterations.get())
+        self._parent.my_mandelbrot.create_mandelbrot(self._parent.image_area.paint_mandelbrot_image, int(self._tf_max_iterations.get()))
 
     def _left_click(self):
         print("Left clicked")
         self._parent.my_mandelbrot.move_left(float(self._tf_pan_factor.get()))
-        self._parent.request_mandelbrot_image(self._tf_max_iterations.get())
+        self._parent.my_mandelbrot.create_mandelbrot(self._parent.image_area.paint_mandelbrot_image, int(self._tf_max_iterations.get()))
 
     def _right_click(self):
         print("Right clicked")
         self._parent.my_mandelbrot.move_right(float(self._tf_pan_factor.get()))
-        self._parent.request_mandelbrot_image(self._tf_max_iterations.get())
+        self._parent.my_mandelbrot.create_mandelbrot(self._parent.image_area.paint_mandelbrot_image, int(self._tf_max_iterations.get()))
 
     def _down_click(self):
         print("Down clicked")
         self._parent.my_mandelbrot.move_down(float(self._tf_pan_factor.get()))
-        self._parent.request_mandelbrot_image(self._tf_max_iterations.get())
+        self._parent.my_mandelbrot.create_mandelbrot(self._parent.image_area.paint_mandelbrot_image, int(self._tf_max_iterations.get()))
 
     def _plus_click(self):
         print("Plus clicked")
         self._parent.my_mandelbrot.zoom_in(float(self._tf_zoom_factor.get()))
-        self._parent.request_mandelbrot_image(self._tf_max_iterations.get())
+        self._parent.my_mandelbrot.create_mandelbrot(self._parent.image_area.paint_mandelbrot_image, int(self._tf_max_iterations.get()))
 
     def _minus_click(self):
         print("Minus clicked")
         self._parent.my_mandelbrot.zoom_out(float(self._tf_zoom_factor.get()))
-        self._parent.request_mandelbrot_image(self._tf_max_iterations.get())
+        self._parent.my_mandelbrot.create_mandelbrot(self._parent.image_area.paint_mandelbrot_image, int(self._tf_max_iterations.get()))
 
     def _go_reset(self):
         print("Reset clicked")
@@ -65,7 +65,7 @@ class ControlArea(tk.Frame):
         self._tf_max_iterations.delete(0,'end')
         self._tf_max_iterations.insert(0,"25")
         self._parent.my_mandelbrot.reset_image()
-        self._parent.request_mandelbrot_image(self._tf_max_iterations.get())
+        self._parent.my_mandelbrot.create_mandelbrot(self._parent.image_area.paint_mandelbrot_image, int(self._tf_max_iterations.get()))
 
     def _create_buttons(self):
         button1=tk.Button(self._frame_pan_buttons, text="U", command=self._up_click)

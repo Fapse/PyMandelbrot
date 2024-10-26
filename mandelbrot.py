@@ -1,15 +1,18 @@
 # Draw Mandelbrot sets in Python
 # Based on the course on the RealPython website:
 # https://realpython.com/mandelbrot-set-python/
+from tkinter import PhotoImage
 
 from mandelbrotset import MandelbrotSet
 from PIL import Image
 from PIL.ImageColor import getrgb
 from viewport import Viewport
+from PIL import ImageTk
 
 class Mandelbrot:
 
     def __init__(self):
+        self.image_mb = None
         self.center_real: float = -0.75
         self.center_im: float = 0.0
         self.width: float = 3.5
@@ -48,7 +51,7 @@ class Mandelbrot:
         self.center_im: float = 0.0
         self.width: float = 3.5
 
-    def create_mandelbrot(self, max_iterations: int) -> Image:
+    def create_mandelbrot(self, func, max_iterations: int = 25) -> None:
         mandelbrot_set = MandelbrotSet(max_iterations=max_iterations, escape_radius=self.escape_radius)
         image = Image.new(mode="RGB", size=(self.image_width, self.image_height))
         for pixel in Viewport(image, center=complex(self.center_real, self.center_im), width=self.width):
@@ -62,7 +65,9 @@ class Mandelbrot:
                     brightness=1,
                 )
             )
-        return image
+        self.image_mb = ImageTk.PhotoImage(image=image)
+        func(self.image_mb)
+
 
 if __name__ == "__main__":
     my_mandelbrot = Mandelbrot()
